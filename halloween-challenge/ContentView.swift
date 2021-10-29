@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    let cart = Cart()
+    @State private var cart = Cart()
+    
     var body: some View {
         NavigationView{
             List{
@@ -26,11 +27,11 @@ struct ContentView: View {
                             Text(item.name)
                             Spacer()
                             HStack{
-                                Text("Price:\(getPriceInLocale(item.price))")
+                                Text("Price: \(getPriceInLocale(item.price))")
                             }
                         }
                         Spacer()
-                        Button(action: {print("BUY")}) {
+                        Button(action: {cart.addItemToCart(item)}) {
                             Image(systemName: "cart.fill.badge.plus")
                                 .resizable()
                                 .frame(width: 50, height: 50)

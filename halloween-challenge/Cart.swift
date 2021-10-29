@@ -17,4 +17,8 @@ struct Cart {
         }
         return tempTotal
     }
+    
+    mutating func addItemToCart(_ item: StoreItem){
+        items.append(item)
+    }
 }
