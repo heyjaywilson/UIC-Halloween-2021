@@ -8,26 +8,42 @@
 import SwiftUI
 
 struct ContentView: View {
+    let cart = Cart()
     var body: some View {
-        List{
-            ForEach(StoreItems) { item in
-                HStack{
-                    Image(item.imageName)
-                        .resizable()
-                        .frame(width: 100, height: 100, alignment: .center)
-                        .scaledToFit()
-                        .background(Color.gray.opacity(0.5))
-                        .cornerRadius(10.0)
-                        .padding(.trailing)
-                    VStack(alignment: .leading){
-                        Text(item.name)
+        NavigationView{
+            List{
+                ForEach(StoreItems) { item in
+                    HStack{
+                        Image(item.imageName)
+                            .resizable()
+                            .frame(width: 100, height: 100, alignment: .center)
+                            .scaledToFit()
+                            .background(Color.gray.opacity(0.5))
+                            .cornerRadius(10.0)
+                            .padding(.trailing)
+                        
+                        VStack(alignment: .leading){
+                            Text(item.name)
+                            Spacer()
+                            HStack{
+                                Text("Price:\(getPriceInLocale(item.price))")
+                            }
+                        }
                         Spacer()
-                        HStack{
-                            Text("Price:\(getPriceInLocale(item.price))")
+                        Button(action: {print("BUY")}) {
+                            Image(systemName: "cart.fill.badge.plus")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(Color.orange)
                         }
                     }
                 }
             }
+            .navigationBarItems(trailing: Button(action: {
+                print("Open Cart")
+            }, label: {
+                Text("Cart Total \(getPriceInLocale(cart.total))")
+            }))
         }
     }
     
