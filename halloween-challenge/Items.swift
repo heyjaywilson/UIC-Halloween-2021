@@ -18,6 +18,10 @@ struct StoreItem: Identifiable, Equatable {
     mutating func purchase(amt: Int){
         quantity = quantity - amt
     }
+    
+    static func ==(lhs: StoreItem, rhs: StoreItem) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 var StoreItems = [

@@ -23,24 +23,22 @@ struct Cart {
         // if in cart, then increase quantity
         // else add item with quanity 1
         
-        guard let indexOfFoundItem = items.firstIndex(of: item) else {
+        let indexOfFoundItem = items.firstIndex{ $0.id == item.id }
+        print(items)
+        
+        guard let indexOfFoundItem = indexOfFoundItem else {
+            print("INside guard")
             var tempItem = item
             tempItem.quantity = 1
-            items.append(tempItem)
+            self.items.append(tempItem)
+            print(items)
             return
         }
-        items[indexOfFoundItem].quantity = items[indexOfFoundItem].quantity + 1
-        
-//        let foundItem = items.filter{ $0.id == item.id }
-//        if foundItem.isEmpty {
-//            var tempItem = item
-//            tempItem.quantity = 1
-//            items.append(tempItem)
-//        } else {
-//            var tempItem = foundItem[0]
-//            tempItem.quantity = tempItem.quantity + 1
-//            guard let indexOfFoundItem = items.firstIndex(of: item)
-//            items[indexOfFoundItem] = tempItem
-//        }
+        print("Outside guard")
+        self.items[indexOfFoundItem].quantity = items[indexOfFoundItem].quantity + 1
     }
+}
+
+extension Collection {
+    func distance(to index: Index) -> Int { distance(from: startIndex, to: index) }
 }
