@@ -39,6 +39,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .navigationBarTitle(Text("Halloween Store"))
             .navigationBarItems(trailing: Button(action: {
                 print("Open Cart")
             }, label: {
