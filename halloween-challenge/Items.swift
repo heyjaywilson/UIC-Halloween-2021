@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct StoreItem: Identifiable {
+struct StoreItem: Identifiable, Equatable {
     let id = UUID()
     let imageName: String
     let name: String
