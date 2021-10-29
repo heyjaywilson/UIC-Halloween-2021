@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct CartView: View {
+    @Environment(\.dismiss) var dismiss
+    
     @Binding var cart: Cart
     var body: some View {
         VStack{
+            HStack{
+                Spacer()
+                Button("Close", action: {dismiss()})
+                    .foregroundColor(.red)
+                    .padding(.trailing)
+            }
             List{
                 ForEach(cart.items) { item in
                     HStack{
@@ -40,11 +48,19 @@ struct CartView: View {
                             }
                             Spacer()
                             Text("Cost: \(getPriceInLocale(item.price, quantity: item.quantity))")
-                        }
+                        }.frame(width: 90)
                     }
                 }
             }
+            Button("Purchase", action: purchase)
+                .buttonStyle(BorderedProminentButtonStyle())
+
         }
+    }
+    
+    func purchase(){
+        print("Purchase")
+        dismiss()
     }
     
     func getPriceInLocale(_ price: Double, quantity: Int) -> String{

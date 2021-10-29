@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var cart = Cart()
+    @State private var showCart = false
     
     var body: some View {
         NavigationView{
@@ -43,10 +44,13 @@ struct ContentView: View {
             }
             .navigationBarTitle(Text("Halloween Store"))
             .navigationBarItems(trailing: Button(action: {
-                print("Open Cart")
+                showCart.toggle()
             }, label: {
                 Text("Cart Total \(getPriceInLocale(cart.total))")
             }))
+            .sheet(isPresented: $showCart){
+                CartView(cart: $cart)
+            }
         }
     }
     
