@@ -31,10 +31,11 @@ struct ContentView: View {
                             }
                         }
                         Spacer()
-                        Button(action: {cart.addItemToCart(item)}) {
+                        Button(action: {
+                            cart.addItemToCart(item)
+                        }) {
                             Image(systemName: "cart.fill.badge.plus")
-                                .resizable()
-                                .frame(width: 50, height: 50)
+                                .font(.largeTitle)
                                 .foregroundColor(Color.orange)
                         }
                     }
