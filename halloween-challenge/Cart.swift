@@ -7,25 +7,20 @@
 
 import Foundation
 
-struct Cart {
-    var items: [StoreItem] = []
+class Cart: ObservableObject {
+    @Published var items: [StoreItem] = []
+    @Published var total: Double = 0.0
     
-    var total: Double {
-        var tempTotal = 0.0
-        for item in items{
-            tempTotal += item.price * Double(item.quantity)
-        }
-        return tempTotal
-    }
-    
-    mutating func addItemToCart(_ item: StoreItem){
+    func addItemToCart(_ item: StoreItem){
         // check if item UUID is in cart
         // if in cart, then increase quantity
         // else add item with quanity 1
         
+        total += item.price
+        print(total)
         let indexOfFoundItem = items.firstIndex{ $0.id == item.id }
         print(items)
-        
+
         guard let indexOfFoundItem = indexOfFoundItem else {
             print("INside guard")
             var tempItem = item

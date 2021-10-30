@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var userCart: Cart
     @State private var cart = Cart()
     @State private var showCart = false
     
@@ -33,7 +34,7 @@ struct ContentView: View {
                         }
                         Spacer()
                         Button(action: {
-                            cart.addItemToCart(item)
+                            userCart.addItemToCart(item)
                         }) {
                             Image(systemName: "cart.fill.badge.plus")
                                 .font(.largeTitle)
@@ -46,10 +47,11 @@ struct ContentView: View {
             .navigationBarItems(trailing: Button(action: {
                 showCart.toggle()
             }, label: {
-                Text("Cart Total \(getPriceInLocale(cart.total))")
+                Text("Cart Total \(getPriceInLocale(userCart.total))")
             }))
             .sheet(isPresented: $showCart){
-                CartView(cart: $cart)
+                CartView()
+                    .environmentObject(userCart)
             }
         }
     }

@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct halloween_challengeApp: App {
+    var userCart = Cart()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(userCart)
         }
     }
 }

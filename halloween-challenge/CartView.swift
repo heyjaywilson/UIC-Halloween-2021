@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CartView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var userCart: Cart
     
-    @Binding var cart: Cart
     var body: some View {
         VStack{
             HStack{
@@ -20,7 +20,7 @@ struct CartView: View {
                     .padding(.trailing)
             }
             List{
-                ForEach(cart.items) { item in
+                ForEach(userCart.items) { item in
                     HStack{
                         Image(item.imageName)
                             .resizable()
@@ -40,7 +40,7 @@ struct CartView: View {
                         Spacer()
                         VStack(alignment: .center){
                             Button(action: {
-                                cart.addItemToCart(item)
+                                userCart.addItemToCart(item)
                             }) {
                                 Image(systemName: "cart.fill.badge.minus")
                                     .font(.largeTitle)
@@ -77,8 +77,9 @@ struct CartView: View {
 }
 
 struct CartView_Previews: PreviewProvider {
-    @State static var cart = Cart(items: [StoreItem(imageName: "vampire", name: "Vampire", price: 50.0, quantity: 2), StoreItem(imageName: "black-cat", name: "Black Cat", price: 5.0, quantity: 2), StoreItem(imageName: "candy-apple", name: "Candy Apple", price: 0.5, quantity: 2)])
+//    @State static var cart: Cart = Cart()
+    
     static var previews: some View {
-        CartView(cart: $cart)
+        CartView()
     }
 }
