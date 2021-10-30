@@ -43,20 +43,18 @@ class Cart: ObservableObject {
     
     func removeItem(_ item: StoreItem){
         total -= item.price
-        print(total)
+        
         let indexOfFoundItem = items.firstIndex{ $0.id == item.id }
-        print(items)
-
+        
         guard let indexOfFoundItem = indexOfFoundItem else {
-            print("INside guard")
-            var tempItem = item
-            tempItem.quantity = 1
-            self.items.append(tempItem)
-            print(items)
             return
         }
-        print("Outside guard")
-        self.items[indexOfFoundItem].quantity = items[indexOfFoundItem].quantity + 1
+        
+        items[indexOfFoundItem].quantity = items[indexOfFoundItem].quantity - 1
+        
+        if items[indexOfFoundItem].quantity == 0 {
+            items.remove(at: indexOfFoundItem)
+        }
     }
 }
 
