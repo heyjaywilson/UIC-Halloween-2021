@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var userCart: Cart
-    @State private var cart = Cart()
+    
     @State private var showCart = false
+    @State private var showConfetti = false
     
     var body: some View {
         NavigationView{

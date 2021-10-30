@@ -32,6 +32,32 @@ class Cart: ObservableObject {
         print("Outside guard")
         self.items[indexOfFoundItem].quantity = items[indexOfFoundItem].quantity + 1
     }
+    func purchaseCart() -> Bool{
+        total = 0.0
+        return true
+    }
+    
+    func emptyItems(){
+        items = []
+    }
+    
+    func removeItem(_ item: StoreItem){
+        total -= item.price
+        print(total)
+        let indexOfFoundItem = items.firstIndex{ $0.id == item.id }
+        print(items)
+
+        guard let indexOfFoundItem = indexOfFoundItem else {
+            print("INside guard")
+            var tempItem = item
+            tempItem.quantity = 1
+            self.items.append(tempItem)
+            print(items)
+            return
+        }
+        print("Outside guard")
+        self.items[indexOfFoundItem].quantity = items[indexOfFoundItem].quantity + 1
+    }
 }
 
 extension Collection {
